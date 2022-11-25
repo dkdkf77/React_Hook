@@ -86,3 +86,121 @@ export default Input;
 - useState는 state,와 setState를 배열 형태로 반환 해준다
 - setState를 불러올때 새로 변경될  state값이 이전 state값과 연관이 되어 있다면 setState의 인자로 콜백 함수를 넣어주는게 좋다
 - useState를 사용해서 초기값을 받아올때 어떤 무거운 일을 해야 한다면 useState의 인자로 콜백 함수를 넣어주면 효율적으로 작업 가능
+
+
+
+
+# useEffect는 ?
+
+- 어떠한 컴포넌트가 Mount = 화면에 첫 렌더링 , Update = 다시 렌더링, Unmount = 화면에서 사라질때
+- 특정 작업을 처리할 코드를 실행하고자 할 때 사용
+- useEffect(()⇒{//작업}) useEffect 훅의 인자로는 기본적으로 콜백 함수는 받는다
+
+### 궁금했던 콜백 함수!! 콜백이란?!
+
+다른 함수의 인자로 전달된 함수를 의미한다?!
+
+콜백 함수 안에 원하는 처리해야할 작업을 적어주면 된다고 한다
+
+# useEffect의 2가지 형태
+
+```jsx
+useEffect(()=>{
+	//작업
+	
+})
+//인자로 하나의 콜백 함수만 받는 형태
+// 렌더링 될때 마다 실행 
+// 즉, mount , update, unmount 렌더링 될때 마다 콜백함수 실행
+```
+
+```jsx
+useEffect(()=>{
+	//작업
+		
+},[value])
+
+//인자로 두개의 콜백 함수 받는 형태
+// [value] = Dependency array
+// 화면에 첫 렌더링 될때 실행 , value 값이 바뀔때 실행 
+
+useEffect(()=>{
+	//작업
+		
+},[])
+
+// 만약 빈배열을 전달해주면
+// 화면에 첫 렌더링 될때만 실행
+```
+
+### useEffect의 사용처
+
+ex ) 타이머를 실행했을때 타이머를 멈추는 정리 작업, 
+
+```jsx
+useEffect(()=>{
+	//구독 
+
+	return () => {
+		//구독해지 ...
+	}
+},[])
+```
+
+## Timer.js 파일
+
+```jsx
+import React, { useEffect } from 'react';
+
+const Timer = (props) => {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log('타이머 돌아가는중 ...');
+    }, 1000);
+
+    return () => {
+      //clean up
+      clearInterval(timer);
+      console.log('타이머가 종료 되었습니다');
+    };
+
+    // 즉 Timer는 마운트 될때 시작 되고 return 값은 unmount 될때 clear 시켜줄수 있다
+  }, []);
+  return (
+    <div>
+      <span>타이머를 시작합니다. 콘솔을 보세요!</span>
+    </div>
+  );
+};
+
+export default Timer;
+```
+
+## UseEffectCleanUp.jsx 파일 import Timer.js
+
+```jsx
+import React, { useEffect } from 'react';
+
+const Timer = (props) => {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log('타이머 돌아가는중 ...');
+    }, 1000);
+
+    return () => {
+      //clean up
+      clearInterval(timer);
+      console.log('타이머가 종료 되었습니다');
+    };
+
+    // 즉 Timer는 마운트 될때 시작 되고 return 값은 unmount 될때 clear 시켜줄수 있다
+  }, []);
+  return (
+    <div>
+      <span>타이머를 시작합니다. 콘솔을 보세요!</span>
+    </div>
+  );
+};
+
+export default Timer;
+```
