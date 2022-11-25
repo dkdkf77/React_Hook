@@ -1,4 +1,4 @@
-### 시계 만들어 보기 !
+### useState로 시계 만들어 보기 !
 
 ```jsx
 import React, { useState } from 'react';
@@ -34,7 +34,7 @@ function App() {
 export default App;
 ```
 
-## input으로 이름 등록 하기
+## useState로 input 이름 등록 하기
 
 ```jsx
 import React, { useState } from 'react';
