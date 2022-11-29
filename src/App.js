@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import Time from './time';
 import Input from './input';
 import Count from './UseEffect1';
-import UseEffectCleanUp from './UseEffectCleanUp';
+
+import UseRef from './useRef';
+import UseRefDiff from './useRef_diff';
+import EffectRef from './effectRef';
 
 function App() {
   return (
@@ -13,7 +16,12 @@ function App() {
       <hr />
       <Count />
       <hr />
-      <UseEffectCleanUp />
+      <hr />
+      <UseRef />
+      <hr />
+      <UseRefDiff />
+      <hr />
+      <EffectRef />
     </div>
   );
 }
